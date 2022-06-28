@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useLocation, useNavigate, useParams } from 'react-router';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -71,6 +71,9 @@ function Lists() {
 
     const { id } = useParams();
 
+    const navigate = useNavigate();
+    const location = useLocation();
+
     type MealType = {
         idMeal: number,
         strMeal: String,
@@ -79,11 +82,15 @@ function Lists() {
 
     const [meal, setMeal] = useState<MealType[]>([]);
 
+    const onClick = (idMeal: Number) => {
+        navigate(`${location.pathname}/${idMeal}`);
+    }
+
     useEffect(() => {
         axios.get(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${id}`)
         .then(res => {
             setMeal(res.data.meals);
-            console.log(res.data.meals);
+            // console.log(res.data.meals);
         })
         .catch(err => console.log(err))
     }, [])
@@ -95,7 +102,7 @@ function Lists() {
                 {
                     meal &&
                     meal.map(item => (
-                        <Card key={item.idMeal}>
+                        <Card key={item.idMeal} onClick={() => onClick(item.idMeal)}>
                             <img src={`${item.strMealThumb}`} alt={`${item.strMeal}`} />
                             <Cover />
                             <p>{item.strMeal}</p>
