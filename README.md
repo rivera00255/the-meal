@@ -1,6 +1,6 @@
 ### React + Typescript
-Free Meal API를 이용한 레시피 검색 서비스
-
+Free Meal API를 이용한 레시피 검색 서비스   
+[https://rivera00255.github.io/the-meal](https://rivera00255.github.io/the-meal)   
 
 ***   
    
