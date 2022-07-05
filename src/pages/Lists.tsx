@@ -76,13 +76,13 @@ function Lists() {
 
     type MealType = {
         idMeal: number,
-        strMeal: String,
-        strMealThumb: String
+        strMeal: string,
+        strMealThumb: string
     }
 
     const [meal, setMeal] = useState<MealType[]>([]);
 
-    const onClick = (idMeal: Number) => {
+    const onClick = (idMeal: number) => {
         navigate(`${location.pathname}/${idMeal}`);
     }
 

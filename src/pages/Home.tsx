@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -76,6 +77,7 @@ const Card = styled.div`
     color: #fff;
     text-shadow: 3px 3px 5px #222;
     margin: 20px;
+    cursor: pointer;
     img {
         width: 100%;
         height: auto;
@@ -99,9 +101,12 @@ function Home() {
 
     interface MealType {
         idMeal: number,
-        strMeal: String,
-        strMealThumb: String
+        strMeal: string,
+        strMealThumb: string
     }
+
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const [word, setWord] = useState('');
     const [result, setResult] = useState<MealType[]>([]);
@@ -116,10 +121,14 @@ function Home() {
         // console.log(word);
         axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${word}`)
         .then(res => {
-            console.log(res.data.meals);
+            // console.log(res.data.meals);
             setResult(res.data.meals);
         }).catch(err => console.log(err));
         setWord('');
+    }
+
+    const onClick = (idMeal: number) => {
+        navigate(`${location.pathname}/${idMeal}`);
     }
 
     return ( 
@@ -134,7 +143,7 @@ function Home() {
                 {
                     result && 
                     result.map(item => (
-                        <Card key={item.idMeal}>
+                        <Card key={item.idMeal} onClick={() => onClick(item.idMeal)}>
                             <img src={`${item.strMealThumb}`} alt={`${item.strMeal}`} />
                             <Cover />
                             <p>{item.strMeal}</p>

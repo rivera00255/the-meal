@@ -31,12 +31,14 @@ function Header() {
         <HeaderContainer>
             <Nav>
                 <Logo>
-                    <img src='https://cdn-icons-png.flaticon.com/512/4252/4252423.png' alt='Good Meal' />
+                    <Link to='/'>
+                        <img src='https://cdn-icons-png.flaticon.com/512/4252/4252423.png' alt='Good Meal' />
+                    </Link>
                 </Logo>
                 <ul>
                     <li><Link to='/'>Home</Link></li>
                     <li><Link to='/meals'>Meals</Link></li>
-                    <li><Link to='/'>Country</Link></li>
+                    <li><Link to='/recipe'>Recipe of the Day</Link></li>
                 </ul>
             </Nav>
         </HeaderContainer>
