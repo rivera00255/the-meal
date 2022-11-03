@@ -11,6 +11,7 @@ export const authSlice = createSlice({
         logout: (state) => {
             state.credential = '';
             localStorage.removeItem('auth');
+            localStorage.removeItem('bookmark');
             return state;
         }
     }

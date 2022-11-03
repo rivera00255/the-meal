@@ -14,6 +14,7 @@ export const bookmarkSlice = createSlice({
         },
         reset: (state) => {
             state = [];
+            localStorage.removeItem('bookmark');
             return state;
         }
     }
