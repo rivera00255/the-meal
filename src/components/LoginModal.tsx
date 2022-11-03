@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { GoogleLogin } from '@react-oauth/google';
 import { ReactComponent as CloseIcon } from '../assets/icon/close.svg';
@@ -51,13 +51,29 @@ const LoginModal = (props: { open: boolean, setOpen: Dispatch<SetStateAction<boo
 
     const { open, setOpen } = props;
 
+    const modalRef: any = useRef(null);
+
     const dispath = useDispatch();
 
     const navigate = useNavigate();
 
+    const clickOutside = (e: Event) => {
+        if(open === true && !modalRef.current.contains(e.target)) {
+            setOpen(false);
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener('mousedown', clickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', clickOutside);
+        }
+    }, [])
+
     return (
         <Container>
-            <Modal>
+            <Modal ref={modalRef}>
                 <Title>Login</Title>
                 <Button onClick={() => setOpen(false)}><CloseIcon width='14px' height='14px' /></Button>
                 <ButtonWrapper>

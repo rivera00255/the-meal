@@ -77,7 +77,11 @@ function Header() {
                         <Button onClick={() => setOpen(true)}>Login</Button>
                     </LocalNav>
                     : <LocalNav>
-                        <Button onClick={() => { dispath(logout()); googleLogout(); }}>Logout</Button>
+                        <Button onClick={() => { 
+                            dispath(logout()); 
+                            googleLogout();
+                            navigate('/');
+                        }}>Logout</Button>
                         <Button onClick={() => navigate('/mypage')}>MyPage</Button>
                     </LocalNav>
                 }
