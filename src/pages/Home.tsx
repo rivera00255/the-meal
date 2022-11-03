@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router';
+import MealCard from 'src/components/MealCard';
 import styled from 'styled-components';
+import { MealType } from './Recipe';
 
 const Container = styled.div`
     width: 1200px;
@@ -52,61 +53,7 @@ const Wrapper = styled.div`
     flex-wrap: wrap;
 `;
 
-const Cover = styled.div`
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
-    border: 2px solid #fff;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: none;
-`;
-
-const Card = styled.div`
-    width: 200px;
-    height: 200px;
-    box-shadow: 4px 4px 8px #afafaf;
-    border-radius: 50%;
-    background: #eee;
-    text-align: center;
-    font-size: 0.9rem;
-    font-weight: 500;
-    position: relative;
-    color: #fff;
-    text-shadow: 3px 3px 5px #222;
-    margin: 20px;
-    cursor: pointer;
-    img {
-        width: 100%;
-        height: auto;
-        border-radius: 50%;
-    }
-    p{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-    &:hover {
-        box-shadow: none;
-    }
-    &:hover ${Cover} {
-        display: block;
-    }
-`;
-
 function Home() {
-
-    interface MealType {
-        idMeal: number,
-        strMeal: string,
-        strMealThumb: string
-    }
-
-    const navigate = useNavigate();
-    const location = useLocation();
 
     const [word, setWord] = useState('');
     const [result, setResult] = useState<MealType[]>([]);
@@ -127,10 +74,6 @@ function Home() {
         setWord('');
     }
 
-    const onClick = (idMeal: number) => {
-        navigate(`${location.pathname}/${idMeal}`);
-    }
-
     return ( 
         <Container>
             <Form onSubmit={onSubmit}>
@@ -140,16 +83,7 @@ function Home() {
                 </ButtonWrapper>
             </Form>
             <Wrapper>
-                {
-                    result && 
-                    result.map(item => (
-                        <Card key={item.idMeal} onClick={() => onClick(item.idMeal)}>
-                            <img src={`${item.strMealThumb}`} alt={`${item.strMeal}`} />
-                            <Cover />
-                            <p>{item.strMeal}</p>
-                        </Card>
-                    ))
-                }
+                { result?.map((item: MealType) => <MealCard key={item.idMeal} meal={item} />) }
             </Wrapper>
         </Container>
      );

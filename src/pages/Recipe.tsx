@@ -1,7 +1,20 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useParams } from 'react-router';
+import { RootState } from 'src/store';
+import { add } from 'src/store/slices/bookmarkSlice';
 import styled from 'styled-components';
+import { ReactComponent as AddIcon } from '../assets/icon/plus.svg';
+
+export interface MealType {
+    idMeal: number,
+    strArea: string,
+    strCategory: string,
+    strMeal: string,
+    strMealThumb: string,
+    strInstructions: string
+}
 
 const Container = styled.div`
     width: 1200px;
@@ -17,6 +30,23 @@ const Wrapper = styled.div`
     width: 90%;
     margin: 0 auto;
     margin-bottom: 100px;
+    position: relative;
+`;
+
+const Button = styled.button`
+    background: #fff;
+    border: 1px solid #888;
+    border-radius: 50%;
+    padding: 8px;
+    position: absolute;
+    top: 360px;
+    right: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+        transform: scale(1.05);
+    }
 `;
 
 const Image = styled.div`
@@ -60,18 +90,11 @@ const Text = styled.div`
 
 function Recipe() {
 
-    interface MealType {
-        idMeal: number,
-        strArea: string,
-        strCategory: string,
-        strMeal: string,
-        strMealThumb: string,
-        strInstructions: string
-    }
-
     const { idMeal } = useParams();
     const location = useLocation();
 
+    const auth = useSelector((state: RootState) => state.auth);
+    const dispatch = useDispatch();
 
     const detailUrl = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`;
     const ramdomUrl = 'https://www.themealdb.com/api/json/v1/1/random.php';
@@ -107,30 +130,30 @@ function Recipe() {
             getIngredients(res.data.meals[0]);
             getMeasure(res.data.meals[0]);
         }).catch(err => console.log(err));
-    }, [])
+    }, [location.pathname])
 
     return ( 
         <Container>
-            <Title>
-                {recipe && recipe.strMeal}
-            </Title>
+            <Title>{recipe?.strMeal}</Title>
             <Wrapper>
-                <Image>
-                    <img src={recipe?.strMealThumb} alt='recipe' />
-                </Image>
+                {
+                    auth.credential !== '' && 
+                    <Button onClick={() => dispatch(add(recipe))}>
+                        <AddIcon width='12px' height='12px' />
+                    </Button>
+                }
+                <Image><img src={recipe?.strMealThumb} alt='recipe' /></Image>
                 <Desc>
                     <SubTitle>Ingredients</SubTitle>
                     <TagWrapper>
                         {
                             ingredient.map((item, i) => (
-                                <Tag key={i}>{`${item} ${measure[i]}`}</Tag>
+                                item !== null && <Tag key={i}>{`${item} ${measure[i]}`}</Tag>
                             ))
                         }
                     </TagWrapper>
                     <SubTitle>Instructions</SubTitle>
-                    <Text>
-                        {recipe?.strInstructions}
-                    </Text>
+                    <Text>{recipe?.strInstructions}</Text>
                 </Desc>
             </Wrapper>
         </Container>

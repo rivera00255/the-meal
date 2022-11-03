@@ -70,8 +70,7 @@ function Meals() {
         <Container>
             <CategoryWrapper>
                 {
-                    categories &&
-                    categories.map((category: CategoryType) => (
+                    categories?.map((category: CategoryType) => (
                         <Category 
                         key={category.idCategory} 
                         url={category.strCategoryThumb}
