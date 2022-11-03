@@ -14,4 +14,10 @@ Free Meal API를 이용한 레시피 검색 서비스
 ![screenshot03](https://user-images.githubusercontent.com/93629526/177231235-7c885093-4c1b-46f5-a1de-ca7bad336a5b.jpg)
 
 #### ▽ 레시피   
-![screenshot04](https://user-images.githubusercontent.com/93629526/177231247-ffdd4422-52fb-4f88-ab4f-f7aa12dc7daa.jpg)
+![screenshot04](https://user-images.githubusercontent.com/93629526/199723119-e5bc4a89-fbc4-414f-99e0-c8dd8f0f4502.jpg)
+
+#### ▽ 구글 로그인   
+![screenshot05](https://user-images.githubusercontent.com/93629526/199722867-c7ac508b-897c-4bcf-8a43-d8384cafb6c1.jpg)
+
+#### ▽ 즐겨찾기   
+![screenshot06](https://user-images.githubusercontent.com/93629526/199722971-c135208d-27b7-4241-9cf4-da93ed503869.jpg)
