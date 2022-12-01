@@ -21,3 +21,7 @@ Free Meal API를 이용한 레시피 검색 서비스
 
 #### ▽ 즐겨찾기   
 ![screenshot06](https://user-images.githubusercontent.com/93629526/199722971-c135208d-27b7-4241-9cf4-da93ed503869.jpg)
+
+#### ▽ API 명세서
+![screenshot07](https://user-images.githubusercontent.com/93629526/204957726-d3d4c3a3-88d9-4fd5-b7c1-1be8b6ae440c.jpg)
+
